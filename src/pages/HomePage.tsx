@@ -1,10 +1,40 @@
+'use client';
 import * as React from 'react';
+import axios from 'axios';
+import AllCart from '../components/Cart/AllCart';
+
+// Define the type for the product data
+interface Products {
+    id: number,
+    title: string,
+    price: number,
+    description: string,
+    category: string,
+    image: string,
+    rating: object
+};
 
 const HomePage: React.FC = () => {
+    const [products, setProducts] = React.useState<Products[]>([]);
+
+    const fetchData = async () => {
+        try {
+            const response = await axios.get<Products[]>(`https://fakestoreapi.com/products`);
+            setProducts(response.data);
+        }
+        catch(error) {
+            console.log(error);
+        }
+    };
+
+    React.useEffect(() => {
+        fetchData();
+    }, []);
+
     return (
-        <div>
-            <h1>Home page</h1>
-        </div>
+        <main>
+            <AllCart products={products} />
+        </main>
     );
 };
 
