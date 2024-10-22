@@ -10,7 +10,7 @@ interface AllCartProps {
     products: Product[];
 };
 
-const AllCart: React.FC<AllCartProps> = ({ products, lastProductRef }) => {
+const AllCart: React.FC<AllCartProps> = ({ products }) => {
     const dispatch = useDispatch();
     const cartItems = useSelector((state: RootState) => state.cart.items);
 
@@ -26,10 +26,9 @@ const AllCart: React.FC<AllCartProps> = ({ products, lastProductRef }) => {
             </div>
             <div className='grid grid-cols-5 gap-6 w-fit mx-auto'>
                 {
-                    products?.map((product, index) => (
+                    products?.map((product) => (
                         <Cart 
                         key={product?.id} 
-                        ref={index === products.length - 1 ? lastProductRef : null}
                         product={product} 
                         handleAddToCart={handleAddToCart} 
                         />
