@@ -1,7 +1,13 @@
 'use client';
 import * as React from 'react'
+import { FaStar } from 'react-icons/fa';
 
 // Define the type for the product data
+interface Rating {
+    rate: number,
+    count: number
+};
+
 interface Product {
     id: number,
     title: string,
@@ -9,35 +15,42 @@ interface Product {
     description: string,
     category: string,
     image: string,
-    rating: object
+    rating: Rating,
 };
 
-const Cart: React.FC<{ product: Product }> = ({ product }) => {
-    const {id, title, price, description, category,image, rating} = product;
+const Cart: React.FC<{ product: Product }> = ({ product, handleAddToCart }) => {
+    const { id, title, price, description, category, image, rating } = product;
 
     return (
-        <div className="w-60 shadow-lg bg-secondary rounded-md flex flex-col justify-between p-3">
+        <div className="w-60 shadow-lg bg-secondary rounded-md flex flex-col gap-2 justify-between p-3">
             <img
                 src={image}
                 alt=""
-                className="w-full h-40 object-cover"
+                className="w-full h-40 object-cover rounded-md"
             />
-            <div className="flex w-full items-center">
-                <h2 className="font-semibold text-xl">{title}</h2>
-            </div>
+            <a className="flex w-full items-center hover:underline" href='#'>
+                <h2 className="font-semibold text-xl">{title.slice(0, 30)}</h2>
+            </a>
 
             <p className="text-text">
                 {description.slice(0, 50)}...
             </p>
 
+            <div className='flex justify-between'>
+                <span className='bg-green-100 px-3 py-1 rounded-md'>{category}</span>
+
+                <p className='flex gap-2 items-center'>
+                    <span className='text-orange-400'><FaStar /></span>
+                    <span>{rating.rate}</span>
+                </p>
+            </div>
+
             <div className="flex items-center justify-between w-full">
-                <div className="flex flex-col items-center gap-4 ">
-                    <div>
-                        {" "}
-                        <p className="text-text text-[0.9rem]">Price : $25</p>{" "}
-                    </div>
-                </div>
-                <button className="btn p-3 rounded border bg-black text-white hover:bg-blue-700 hover:text-white">
+                <p className="text-text text-[0.9rem]">Price : ${price}</p>
+                <button
+                    onClick={handleAddToCart}
+                    className="btn p-3 rounded border bg-black text-white hover:bg-blue-700 hover:text-white"
+                >
                     Add to cart
                 </button>
             </div>
