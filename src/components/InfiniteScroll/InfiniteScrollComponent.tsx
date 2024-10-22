@@ -3,8 +3,22 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import CartSummary from '../Cart/CartSummary'
 import Cart from '../Cart/Cart'
 import Loader from '../UI/Loader'
+import { Product } from '../../api/productsApi'
 
-const InfiniteScrollComponent: React.FC = ({ products, limit, fetchMoreData, hashMore }) => {
+interface InfiniteScrollComponentProps {
+    products: Product[];
+    limit: number;
+    fetchMoreData: () => void;
+    hashMore: boolean;
+};
+
+const InfiniteScrollComponent: React.FC<InfiniteScrollComponentProps> = ({
+    products,
+    limit,
+    fetchMoreData,
+    hashMore
+}) => {
+
     return (
         <div>
             <InfiniteScroll
@@ -23,13 +37,13 @@ const InfiniteScrollComponent: React.FC = ({ products, limit, fetchMoreData, has
                         <h1 className='text-4xl font-bold text-center'>Choose Your Favorite Products</h1>
                         <CartSummary />
                     </div>
-                    <div className='grid grid-cols-5 gap-6 w-fit mx-auto'>
+                    <div className='grid grid-cols-4 gap-6 w-fit mx-auto'>
                         {
                             products?.map((product) => (
                                 <Cart
                                     key={product?.id}
                                     product={product}
-                                    // handleAddToCart={handleAddToCart}
+                                // handleAddToCart={handleAddToCart}
                                 />
                             ))
                         }

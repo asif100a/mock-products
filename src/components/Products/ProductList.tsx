@@ -1,21 +1,19 @@
 import * as React from 'react'
-import { useGetProductsQuery } from '../../api/productsApi';
-import AllCart from '../Cart/AllCart';
-import Loader from '../UI/Loader';
+import { Product, useGetProductsQuery } from '../../api/productsApi';
 import InfiniteScrollComponent from '../InfiniteScroll/InfiniteScrollComponent';
 import axios from 'axios';
 
 const ProductList: React.FC = () => {
-  const [count, setCount] = React.useState(0);
-  const [limit, setLimit] = React.useState(10);
-  const [hashMore, setHashMore] = React.useState(true);
+  const [count, setCount] = React.useState<number>(0);
+  const [limit, setLimit] = React.useState<number>(10);
+  const [hashMore, setHashMore] = React.useState<boolean>(true);
 
   const pages = Math.ceil(count / limit);
 
   React.useEffect(() => {
     const countData = async () => {
       try {
-        const { data } = await axios.get('https://fakestoreapi.com/products');
+        const { data } = await axios.get<Product[]>('https://fakestoreapi.com/products');
         setCount(data.length);
       }
       catch (err) {
@@ -27,22 +25,25 @@ const ProductList: React.FC = () => {
 
   const fetchMoreData = () => {
     if (limit < count) {
-      console.log('Pages:', pages);
+      // console.log('Pages:', pages);
       setLimit(pages * limit);
-      console.log("Limit", limit);
+      // console.log("Limit", limit);
     }
     else {
       setHashMore(false);
+      console.log("Limit", limit);
     }
   };
 
-  const { data: products, error, isLoading } = useGetProductsQuery({ limit });
+  const { data: products = [], error, isLoading } = useGetProductsQuery({ limit });
 
 
   if (isLoading) {
     return <p>Loading....</p>
   }
-  if (error) return console.log(error);
+  if (error) {
+    return <p>And error occurred</p>
+  }
 
   return (
     <>
@@ -52,9 +53,6 @@ const ProductList: React.FC = () => {
         fetchMoreData={fetchMoreData}
         hashMore={hashMore}
       />
-
-      {/* <AllCart products={products} />
-      <Loader /> */}
     </>
   )
 }
