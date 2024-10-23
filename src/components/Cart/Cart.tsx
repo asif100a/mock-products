@@ -24,7 +24,7 @@ interface CartProps {
 };
 
 const Cart: React.FC<CartProps> = ({ product, handleAddToCart }) => {
-    const { id, title, price, description, category, image, rating } = product;
+    const { title, price, description, category, image, rating } = product;
 
     return (
         <div className="w-60 shadow-lg bg-secondary rounded-md flex flex-col gap-2 justify-between p-3">

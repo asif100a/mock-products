@@ -32,13 +32,13 @@ const CartSummary: React.FC<CartSummaryProps> = ({ handleRemoveOneItem, handleCl
       <div className="flex justify-between mt-1 mb-2">
         <button
           onClick={handleRemoveOneItem}
-          className="w-fit px-3 py-0 border rounded-md"
+          className="w-fit px-3 py-0 border rounded-md text-orange-500"
         >
           Remove 1
         </button>
         <button
           onClick={handleClearItems}
-          className="w-fit px-3 py-0 border rounded-md"
+          className="w-fit px-3 py-0 border rounded-md text-orange-500"
         >
           Clear All
         </button>
