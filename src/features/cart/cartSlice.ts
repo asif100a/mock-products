@@ -4,19 +4,27 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 
 // Type Definition
-interface CartItem extends Product {
+export interface CartItem extends Product {
     quantity: number
 };
 interface CartState {
-    items: CartItem[],
-    totalQuantity: number,
-    totalPrice: number,
+    items: CartItem[];
+    totalQuantity: number;
+    totalPrice: number;
+    _persist: {
+        rehydrated: boolean;
+        version: number;
+    }
 };
 
 const initialState: CartState = {
     items: [],
     totalQuantity: 0,
-    totalPrice: 0
+    totalPrice: 0,
+    _persist: {
+        rehydrated: false,
+        version: 1,
+    }
 };
 
 const cartSlice = createSlice({

@@ -44,8 +44,8 @@ const InfiniteScrollComponent: React.FC<InfiniteScrollComponentProps> = ({
                 <section className='py-8'>
                     <div className='w-fit mx-auto'>
                         <div className='mb-6 mx-auto'>
-                            <h1 className='text-4xl font-bold text-center'>Choose Your Favorite Products</h1>
-                            <div className='flex justify-between gap-6 mt-3'>
+                            <h1 className='text-2xl md:text-3xl lg:text-4xl font-bold text-center'>Choose Your Favorite Products</h1>
+                            <div className='flex flex-col md:flex-row justify-center items-center md:justify-between gap-3 md:gap-6 mt-3 lg:mt-6 xl:mt-3 mx-3 md:mx-0'>
                                 <SearchBar handleSearch={handleSearch} />
                                 <CartSummary
                                     handleRemoveOneItem={handleRemoveOneItem}
@@ -53,7 +53,7 @@ const InfiniteScrollComponent: React.FC<InfiniteScrollComponentProps> = ({
                                 />
                             </div>
                         </div>
-                        <div className='grid grid-cols-5 gap-6 w-fit mx-auto'>
+                        <div className='grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-3 lg:gap-6 w-fit mx-auto'>
                             {
                                 products?.map((product) => (
                                     <Cart

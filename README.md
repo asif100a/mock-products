@@ -1,50 +1,51 @@
-# React + TypeScript + Vite
+# Mock-Products
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Overview
 
-Currently, two official plugins are available:
+This project is a simple e-commerce product list application built using **React**, **TypeScript**, and **RTK Query**. It allows users to view a list of products with infinite scrolling, search for products, and manage a shopping cart. The cart data is persisted using **Redux Persist** to ensure it remains intact after page refreshes.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Key Features:
 
-## Expanding the ESLint configuration
+1. **Product Listing with Infinite Scroll**: 
+   - Fetch products from the [FakeStore API](https://fakestoreapi.com/products) using RTK Query.
+   - Load more products dynamically as the user scrolls.
+   
+2. **Search Functionality**:
+   - Search bar to filter the product list dynamically based on the search term.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+3. **Cart Management**:
+   - Add products to the cart, with the cart summary showing the total items and total price.
+   - Cart state is persisted across sessions using **Redux Persist**.
 
-- Configure the top-level `parserOptions` property like this:
+4. **Responsive Design**:
+   - Mobile-friendly design that adapts to different screen sizes.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Steps to Run the App Locally
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Prerequisites:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- **Node.js** (v14 or higher)
+- **npm** or **yarn**
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### Installation Instructions:
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/asif100a/mock-products
+   ```
+
+2. **Install dependencies**:
+  ```bash
+  npm start
+  # or
+  yarn start
+  ```
+
+3. **Run the application**:
+  ```bash
+  npm start
+ # or
+ yarn start
+ ```
+
+
