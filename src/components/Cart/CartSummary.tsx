@@ -1,6 +1,11 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 const CartSummary: React.FC = () => {
+  // Access the cart summary using useSelector
+  const totalQuantity = useSelector((state: RootState) => state.cart.totalQuantity);
+  const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
 
   return (
     <div className="bg-blue-50 w-fit justify-between rounded-xl px-3">
@@ -12,11 +17,24 @@ const CartSummary: React.FC = () => {
 
       <div className="flex justify-between gap-3">
         <p className="text-[0.9rem] lg:text-[1.1rem] text-gray-500">
-          <span>Total Items:</span> <span className="text-green-600 font-semibold">10</span>
+          <span>Total Items:</span> <span className="text-green-600 font-semibold">{totalQuantity}</span>
         </p>
         <p className="text-[0.9rem] lg:text-[1.1rem] text-gray-500">
-          <span>Price:</span> <span className="text-red-600 font-semibold">$70</span>
+          <span>Price:</span> <span className="text-red-600 font-semibold">${totalPrice.toFixed(2)}</span>
         </p>
+      </div>
+
+      <div className="flex justify-between mt-1 mb-2">
+        <button
+          className="w-fit px-3 py-0 border rounded-md"
+        >
+          Remove 1
+        </button>
+        <button
+          className="w-fit px-3 py-0 border rounded-md"
+        >
+          Clear All
+        </button>
       </div>
     </div>
   );

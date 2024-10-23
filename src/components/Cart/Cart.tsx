@@ -18,7 +18,12 @@ interface Product {
     rating: Rating,
 };
 
-const Cart: React.FC<{ product: Product }> = ({ product, handleAddToCart }) => {
+interface CartProps {
+    product: Product;
+    handleAddToCart: (product: Product) => void;
+};
+
+const Cart: React.FC<CartProps> = ({ product, handleAddToCart }) => {
     const { id, title, price, description, category, image, rating } = product;
 
     return (
@@ -48,7 +53,7 @@ const Cart: React.FC<{ product: Product }> = ({ product, handleAddToCart }) => {
             <div className="flex items-center justify-between w-full">
                 <p className="text-text text-[0.9rem]">Price : ${price}</p>
                 <button
-                    onClick={handleAddToCart}
+                    onClick={() => handleAddToCart(product)}
                     className="btn p-3 rounded border bg-black text-white hover:bg-blue-700 hover:text-white"
                 >
                     Add to cart

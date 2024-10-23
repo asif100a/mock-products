@@ -4,6 +4,10 @@ import CartSummary from '../Cart/CartSummary'
 import Cart from '../Cart/Cart'
 import Loader from '../UI/Loader'
 import { Product } from '../../api/productsApi'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../store/store'
+import { addToCart } from '../../features/cart/cartSlice'
+import SearchBar from '../Search/SearchBar'
 
 interface InfiniteScrollComponentProps {
     products: Product[];
@@ -19,6 +23,13 @@ const InfiniteScrollComponent: React.FC<InfiniteScrollComponentProps> = ({
     hashMore
 }) => {
 
+    const dispatch = useDispatch();
+    const cartItems = useSelector((state: RootState) => state.cart.items);
+
+    const handleAddToCart = (product: Product) => {
+        dispatch(addToCart(product));
+    };
+
     return (
         <div>
             <InfiniteScroll
@@ -33,20 +44,25 @@ const InfiniteScrollComponent: React.FC<InfiniteScrollComponentProps> = ({
                 }
             >
                 <section className='py-8'>
-                    <div className='mb-8 flex flex-col justify-center items-center gap-3'>
-                        <h1 className='text-4xl font-bold text-center'>Choose Your Favorite Products</h1>
-                        <CartSummary />
-                    </div>
-                    <div className='grid grid-cols-4 gap-6 w-fit mx-auto'>
-                        {
-                            products?.map((product) => (
-                                <Cart
-                                    key={product?.id}
-                                    product={product}
-                                // handleAddToCart={handleAddToCart}
-                                />
-                            ))
-                        }
+                    <div className='w-fit mx-auto'>
+                        <div className='mb-6 mx-auto'>
+                            <h1 className='text-4xl font-bold text-center'>Choose Your Favorite Products</h1>
+                            <div className='flex justify-between gap-6 mt-3'>
+                                <SearchBar />
+                                <CartSummary />
+                            </div>
+                        </div>
+                        <div className='grid grid-cols-5 gap-6 w-fit mx-auto'>
+                            {
+                                products?.map((product) => (
+                                    <Cart
+                                        key={product?.id}
+                                        product={product}
+                                        handleAddToCart={handleAddToCart}
+                                    />
+                                ))
+                            }
+                        </div>
                     </div>
                 </section>
             </InfiniteScroll>
