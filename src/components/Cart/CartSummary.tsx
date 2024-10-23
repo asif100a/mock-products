@@ -2,7 +2,12 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 
-const CartSummary: React.FC = () => {
+interface CartSummaryProps {
+  handleRemoveOneItem: () => void;
+  handleClearItems: () => void;
+};
+
+const CartSummary: React.FC<CartSummaryProps> = ({ handleRemoveOneItem, handleClearItems }) => {
   // Access the cart summary using useSelector
   const totalQuantity = useSelector((state: RootState) => state.cart.totalQuantity);
   const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
@@ -26,11 +31,13 @@ const CartSummary: React.FC = () => {
 
       <div className="flex justify-between mt-1 mb-2">
         <button
+          onClick={handleRemoveOneItem}
           className="w-fit px-3 py-0 border rounded-md"
         >
           Remove 1
         </button>
         <button
+          onClick={handleClearItems}
           className="w-fit px-3 py-0 border rounded-md"
         >
           Clear All
